@@ -1,5 +1,5 @@
 name: Go
-on: [push]
+on: [push, pull_request]
 jobs:
   build:
     name: Build
@@ -27,7 +27,7 @@ jobs:
           golangci-lint run
 
       - name: Test
-        rune: |
+        run: |
           go test -v -race ./...
 
       - name: Build
