@@ -24,7 +24,7 @@ jobs:
         
       - name: Lint
         run: |
-          golangci-lint run
+          $(go env GOPATH)/bin/golangci-lint run
 
       - name: Test
         run: |
