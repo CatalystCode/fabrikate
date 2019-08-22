@@ -1,5 +1,5 @@
 name: Go
-on: [push, pull_request]
+on: [push]
 jobs:
   build:
     name: Build
@@ -14,16 +14,13 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
 
-      - name: Download linter
-        run: |
-          curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.17.1
-
       - name: Get dependencies
         run: |
           go mod download
 
-      - name: Lint
+      - name: Download linter and Lint
         run: |
+          curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.17.1
           golangci-lint run
 
       - name: Test
